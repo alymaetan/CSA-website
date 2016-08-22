@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<title>Gallery</title>
+<link rel="stylesheet" type="text/css" href="css/mainStyles.css">
+<link rel="stylesheet" type="text/css" href="css/gallery.css">
+</head>
+
+<body>
+    <img id = "navigationbar" src = "img/navigationbar.png">
+        <nav>
+        	<table width="80%" border="1" cellspacing="0" cellpadding="5">
+        	  <tr>
+                  <td width="270"><a href="index.html">HOME</a></td>
+                  <td width="270"><a href="about.html">ABOUT</a></td>
+                  <td width="270"><a href="event.html">EVENTS</a></td>
+                  <td width="270"><div class="dropdown">
+                      <button onclick="dropdown()" class="gallerybtn"><b>GALLERY</b></button>
+                      <div id="Dropdown" class="dropdown-content">
+                        <a href="gallery2015-2016.html">2015-2016</a>
+                        <a href="gallery2016-2017.html">2016-2017</a>
+                      </div>
+                    </div></td>
+                  <td width="270"><a href="sponsors.html">SPONSORS</a></td>
+        		</tr>
+        	</table>
+        </nav>
+    <div id ="display1">
+        <h1> 2016-2017 Events</h1>
+        <table width ="45%" cellspacing="10" cellpadding="20">
+          <tr>
+          </tr>
+        </table>
+    </div>
+</body>
+
+<script>
+  /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function dropdown() {
+    document.getElementById("Dropdown").classList.toggle("show");
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.gallerybtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+</html>
