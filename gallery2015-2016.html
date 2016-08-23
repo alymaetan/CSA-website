@@ -236,12 +236,36 @@ for (e = 0; e < 50; e++) {
 var counter = 0;
 
 document.addEventListener('keydown', function(event) {
-    if (event.keyCode == 37) {
-        // find way to get next left function
+    var info = determine();
+	var slot1 = info[0];
+	var slot2 = info[1];
+	var slot3 = info[2];
+	if (event.keyCode == 37) {
+		previous(slot1, slot2, slot3);
     } else if (event.keyCode == 39) {
-        // find way to get next right function
+		next(slot1, slot2, slot3);
     }
 })
+
+function determine() {
+	var stringArray = [];
+	if (drag == true) {
+		stringArray = ["dragArray", 'picDrag', 'DragonBoat'];
+	} else if (food == true) {
+		stringArray = ["foodArray", 'picFood', 'FoodOuting'];
+	} else if (bubble == true) {
+		stringArray = ["bubbleArray", 'picBubble', 'BubbleTea'];
+	} else if (dump == true) {
+		stringArray = ["dumplingArray", 'picDumpling', 'Dumpling'];
+	} else if (lantern == true) {
+		stringArray = ["lanternArray", 'picLantern', 'LanternFestival'];
+	} else if (paint == true) {
+		stringArray = ["paintArray", 'picPaint', 'Paintball'];
+	} else if (skate == true) {
+		stringArray = ["skatingArray", 'picSkating', 'IceSkating'];
+	}
+	return stringArray
+}
 function checkOrientation(id) {
     var pic = document.getElementById(id);
     var h = pic.height;
