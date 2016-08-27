@@ -129,41 +129,43 @@
     <div id = "backdrop">
         <h1> 2015-2016 Events</h1>
 		<hr>
+		<h5 align="center"><font color="white"> Click Image to View Album </font></h5>
+		<h5 align="center"><font color = "white"> Left and Right arrow to navigate album </font></h5>
         <table id="table1" margin-left="50px" cellspacing="25" cellpadding="30">
           <tr>
                 <td width="225" align="center">
                   <h2>Dragon Boat Racing</h2>
-                  <img id = "dragonRacingFront" width="150px" height="150px" src="img/DragonBoat/pic0.jpg" onclick="dragonPic()">
+                      <span style="cursor:pointer"><img id = "dragonRacingFront" width="150px" height="150px" src="img/DragonBoat/pic0.jpg" onclick="dragonPic()"></span>
                 </td>
                 <td width="150" align="center">
                   <h2>Bubble Tea</h2>
-                  <img id = "bubbleTeaSelling" width="150px" height="150px" src="img/BubbleTea/pic0.jpg" onclick="bubblePic()">
+                  <span style="cursor:pointer"><img id = "bubbleTeaSelling" width="150px" height="150px" src="img/BubbleTea/pic0.jpg" onclick="bubblePic()"></span>
                 </td>
           </tr>
           <tr>
                 <td width="225" align="center">
                 <h2>Food Outing</h2>
-                  <img id="foodOuting" width="150px" height="150px" src="img/FoodOuting/pic0.jpg" onclick="foodPic()">
+                  <span style="cursor:pointer"><img id="foodOuting" width="150px" height="150px" src="img/FoodOuting/pic0.jpg" onclick="foodPic()"></span>
                 </td>
                 <td width="150" align="center">
                   <h2> Dumpling Making </h2>
-                    <img id = "dumpling" width="150px" height="150px" src="img/Dumpling/pic0.jpg" onclick="dumplingPic()">
+                    <span style="cursor:pointer"><img id = "dumpling" width="150px" height="150px" src="img/Dumpling/pic0.jpg" onclick="dumplingPic()"></span>
                 </td>
           </tr>
           <tr>
               <td width="225" align="center">
                 <h2>Ice Skating</h2>
-                <img id="skating" width="150px" height="150px" src="img/IceSkating/pic0.jpg" onclick="skatingPic()">
+                <span style="cursor:pointer"><img id="skating" width="150px" height="150px" src="img/IceSkating/pic0.jpg" onclick="skatingPic()"></span>
               </td>
               <td width="150" align="center">
                 <h2>Lantern Festival</h2>
-                <img id="lantern" width="150px" height="150px" src="img/LanternFestival/pic0.jpg" onclick="lanternPic()">
+                <span style="cursor:pointer"><img id="lantern" width="150px" height="150px" src="img/LanternFestival/pic0.jpg" onclick="lanternPic()"></span>
               </td>
           </tr>
           <tr>
             <td width="225" align="center">
               <h2> Paintball with HKSA </h2>
-                <img id = "paint" width="150px" height="150px" src="img/Paintball/pic0.jpg" onclick="paintPic()">
+                <span style="cursor:pointer"><img id = "paint" width="150px" height="150px" src="img/Paintball/pic0.jpg" onclick="paintPic()"></span>
             </td>
             <td></td>
             <td></td>
@@ -217,7 +219,7 @@ for (a = 0; a < 18; a++) {
     dragArray[a] = new Image();
     dragArray[a].src = "img/DragonBoat/pic" + a + ".jpg";
 }
-for (b = 0; b < 2; b++) {
+for (b = 0; b < 3; b++) {
     bubbleArray[b] = new Image();
     bubbleArray[b].src = "img/BubbleTea/pic" + b + ".jpg";
 }
@@ -235,18 +237,6 @@ for (e = 0; e < 50; e++) {
 }
 
 var counter = 0;
-
-document.addEventListener('keydown', function(event) {
-    var info = determine();
-	var slot1 = info[0];
-	var slot2 = info[1];
-	var slot3 = info[2];
-	if (event.keyCode == 37) {
-		previous(slot1, slot2, slot3);
-    } else if (event.keyCode == 39) {
-		next(slot1, slot2, slot3);
-    }
-})
 
 function determine() {
 	var stringArray = [];
@@ -266,6 +256,24 @@ function determine() {
 		stringArray = ["skatingArray", 'picSkating', 'IceSkating'];
 	}
 	return stringArray
+}
+function getArrayByName(name) {
+	if (name == "dragArray") {
+		return dragArray;
+	} else if (name == "bubbleArray") {
+		return bubbleArray;
+	} else if (name == "lanternArray") {
+		return lanternArray;
+	} else if (name == "paintArray") {
+		return paintArray;
+	} else if (name == "skatingArray") {
+		return skatingArray;
+	} else if (name == "dumpingArray") {
+		return dumplingArray;
+	} else if (name == "foodArray") {
+		return foodArray;
+	}
+	return null;
 }
 function checkOrientation(id) {
     var pic = document.getElementById(id);
@@ -288,8 +296,13 @@ function dragonPic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("dragonBoatPic").style.display = "block";
     checkOrientation("picDrag");
-	bubble,food,dump,skate,lantern,paint = false;
 	drag = true;
+	food = false;
+	bubble = false;
+	dump = false;
+	skate = false;
+	lantern = false;
+	paint = false;
 }
 function bubblePic() {
     document.getElementById("foodsPic").style.display = "none";
@@ -300,8 +313,13 @@ function bubblePic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("bubbleTeaPic").style.display = "block";
     checkOrientation("picBubble");
-	food, drag, dump, skate, lantern, paint = false;
+	drag = false;
+	food = false;
 	bubble = true;
+	dump = false;
+	skate = false;
+	lantern = false;
+	paint = false;
 }
 function foodPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -312,8 +330,13 @@ function foodPic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("foodsPic").style.display = "block";
     checkOrientation("picFood");
-	bubble, drag, dump, skate, lantern, paint = false;
+	drag = false;
 	food = true;
+	bubble = false;
+	dump = false;
+	skate = false;
+	lantern = false;
+	paint = false;
 }
 function dumplingPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -324,8 +347,13 @@ function dumplingPic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("dumplingPic").style.display = "block";
     checkOrientation("picDumpling");
-	bubble, drag, food, skate, lantern, paint = false;
+	drag = false;
+	food = false;
+	bubble = false;
 	dump = true;
+	skate = false;
+	lantern = false;
+	paint = false;
 }
 function skatingPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -336,8 +364,13 @@ function skatingPic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("skatingPic").style.display="block";
     checkOrientation("picSkating");
-	bubble, drag, food, dump, lantern, paint = false;
+	drag = false;
+	food = false;
+	bubble = false;
+	dump = false;
 	skate = true;
+	lantern = false;
+	paint = false;
 }
 function lanternPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -348,8 +381,13 @@ function lanternPic() {
     document.getElementById("paintPic").style.display="none";
     document.getElementById("lanternPic").style.display="block";
     checkOrientation("picLantern");
-	bubble, drag, dump, food, skate, paint = false;
+	drag = false;
+	food = false;
+	bubble = false;
+	dump = false;
+	skate = false;
 	lantern = true;
+	paint = false;
 }
 function paintPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -360,13 +398,21 @@ function paintPic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="block";
     checkOrientation("picPaint");
-	bubble, drag, food, dump, skate, lantern = false;
+	drag = false;
+	food = false;
+	bubble = false;
+	dump = false;
+	skate = false;
+	lantern = false;
 	paint = true;
 }
 
 function next(arr, id, topic) {
     counter = ++counter % arr.length;
-    document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
+	console.log(counter);
+	console.log(arr[counter].src);
+	document.getElementById(id).src = arr[counter].src;
+    //document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
     checkOrientation(id);
 }
 
@@ -375,8 +421,22 @@ function previous(arr, id, topic) {
         counter = arr.length;
     }
     counter = --counter;
-    document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
+	document.getElementById(id).src = arr[counter].src;
+    //document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
     checkOrientation(id);
 }
+
+document.addEventListener('keydown', function(event) {
+    var info = determine();
+	var slot1 = info[0];
+	var slot2 = info[1];
+	var slot3 = info[2];
+	var array = getArrayByName(slot1);
+	if (event.keyCode == 37) {
+		previous(array, slot2, slot3);
+    } else if (event.keyCode == 39) {
+		next(array, slot2, slot3);
+    }
+})
 </script>
 </html>
