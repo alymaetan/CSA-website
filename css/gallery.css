@@ -95,15 +95,12 @@ nav {
 
 #dragonBoatPic, #bubbleTeaPic, #foodsPic, #dumplingPic, #skatingPic, #lanternPic, #paintPic {
     position: fixed;
-<<<<<<< HEAD
     float:left;
     margin-left: 50%;
     margin-top: 1%;
     z-index: -1;
-=======
     margin-left: 760px;
     margin-top: 25px;
->>>>>>> refs/remotes/origin/master
 }
 
 #dragonRacingFront, #bubbleTeaSelling, #foodOuting, #dumpling, #skating, #lantern, #paint {
