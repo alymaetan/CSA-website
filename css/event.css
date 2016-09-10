@@ -58,7 +58,7 @@ p {
 iframe {
     position: fixed;
     display: block;
-    margin-left: 800px;
+    right: 5%;
     margin-top: 100px;
     z-index: 2;
     -moz-border-radius: 12px;
