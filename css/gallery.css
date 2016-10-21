@@ -96,12 +96,9 @@ nav {
 #dragonBoatPic, #bubbleTeaPic, #foodsPic, #dumplingPic, #skatingPic, #lanternPic, #paintPic {
     position: fixed;
     float:left;
-<<<<<<< HEAD
-    margin-left: 50%;
-    margin-top: 1%;
-    z-index: -1;
-=======
->>>>>>> parent of cf2cb89... Change to Percentage
+    margin-left: 760px;
+    margin-top: 25px;
+    z-index: 1;
     margin-left: 760px;
     margin-top: 25px;
 }

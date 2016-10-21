@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>GT CSA</title>
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="js/lightbox.js"></script>
+<link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/mainStyles.css">
 <link rel="stylesheet" type="text/css" href="css/gallery.css">
 <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico" />
@@ -26,7 +30,7 @@
         		</tr>
         	</table>
         </nav>
-    <div id="dragonBoatPic" align="right" style="display: none">
+      <div id="dragonBoatPic" align="right" style="display: none;">
       <table>
         <tr>
           <td></td>
@@ -35,7 +39,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picDrag" src="img/DragonBoat/pic0.jpg"></td>
+          <td>
+            <a id='dragPop' rel="lightbox[drag]" href="img/dragonBoatPic/pic0.jpg"><img id="picDrag"></a>
+          </td>
           <td></td>
         </tr>
       </table>
@@ -49,7 +55,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picBubble" src="img/BubbleTea/pic0.jpg"></td>
+          <td>
+            <a id='bubblePop' rel="lightbox[bubble]" href="img/BubbleTea/pic0.jpg"><img id="picBubble"></a>
+          </td>
           <td></td>
         </tr>
       </table>
@@ -63,7 +71,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picFood" src="img/FoodOuting/pic0.jpg"></td>
+          <td>
+          <a id='foodPop' rel="lightbox[food]" href="img/FoodOuting/pic0.jpg"><img id="picFood"></a>
+        </td>
           <td></td>
         </tr>
       </table>
@@ -77,7 +87,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picDumpling" src="img/Dumpling/pic0.jpg"></td>
+          <td>
+            <a id='dumpPop' rel="lightbox[dumpling]" href="img/Dumpling/pic0.jpg"><img id="picDumpling"></a>
+          </td>
           <td></td>
         </tr>
       </table>
@@ -91,7 +103,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picSkating" src="img/IceSkating/pic0.jpg"></td>
+          <td>
+          <a id='IcePop' rel="lightbox[skate]" href="img/IceSkating/pic0.jpg"><img id="picSkating"></a>
+        </td>
           <td></td>
         </tr>
       </table>
@@ -105,7 +119,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picLantern" src="img/LanternFestival/pic0.jpg"></td>
+          <td><a id='lanternPop' rel="lightbox[lantern]" href="img/LanternFestival/pic0.jpg"><img id="picLantern"></a></td>
           <td></td>
         </tr>
       </table>
@@ -119,7 +133,9 @@
         </tr>
         <tr>
           <td></td>
-          <td><img id="picPaint" src="img/Paintball/pic0.jpg"></td>
+          <td>
+            <a id='PaintPop' rel="lightbox[paint]" href="img/Paintball/pic0.jpg"><img id="picPaint"></a>
+          </td>
           <td></td>
         </tr>
       </table>
@@ -239,21 +255,21 @@ for (e = 0; e < 50; e++) {
 var counter = 0;
 
 function determine() {
-	var stringArray = [];
-	if (drag == true) {
-		stringArray = ["dragArray", 'picDrag', 'DragonBoat'];
-	} else if (food == true) {
-		stringArray = ["foodArray", 'picFood', 'FoodOuting'];
+  var stringArray = [];
+  if (drag == true) {
+    stringArray = ["dragArray", 'picDrag', 'DragonBoat','dragPop'];
+  } else if (food == true) {
+    stringArray = ["foodArray", 'picFood', 'FoodOuting', 'foodPop'];
 	} else if (bubble == true) {
-		stringArray = ["bubbleArray", 'picBubble', 'BubbleTea'];
+		stringArray = ["bubbleArray", 'picBubble', 'BubbleTea', 'bubblePop'];
 	} else if (dump == true) {
-		stringArray = ["dumplingArray", 'picDumpling', 'Dumpling'];
+		stringArray = ["dumplingArray", 'picDumpling', 'Dumpling', 'dumpPop'];
 	} else if (lantern == true) {
-		stringArray = ["lanternArray", 'picLantern', 'LanternFestival'];
+		stringArray = ["lanternArray", 'picLantern', 'LanternFestival', 'lanternPop'];
 	} else if (paint == true) {
-		stringArray = ["paintArray", 'picPaint', 'Paintball'];
+		stringArray = ["paintArray", 'picPaint', 'Paintball', 'PaintPop'];
 	} else if (skate == true) {
-		stringArray = ["skatingArray", 'picSkating', 'IceSkating'];
+		stringArray = ["skatingArray", 'picSkating', 'IceSkating', 'IcePop'];
 	}
 	return stringArray
 }
@@ -295,14 +311,16 @@ function dragonPic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("dragonBoatPic").style.display = "block";
+    drag = true;
+    food = false;
+    bubble = false;
+    dump = false;
+    skate = false;
+    lantern = false;
+    paint = false;
+    setImage(dragArray, 'picDrag');
+    setImageReference(dragArray, "dragPop");
     checkOrientation("picDrag");
-	drag = true;
-	food = false;
-	bubble = false;
-	dump = false;
-	skate = false;
-	lantern = false;
-	paint = false;
 }
 function bubblePic() {
     document.getElementById("foodsPic").style.display = "none";
@@ -312,14 +330,16 @@ function bubblePic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("bubbleTeaPic").style.display = "block";
+    drag = false;
+    food = false;
+    bubble = true;
+    dump = false;
+    skate = false;
+    lantern = false;
+    paint = false;
+    setImage(bubbleArray, 'picBubble');
+    setImageReference(bubbleArray, "bubblePop");
     checkOrientation("picBubble");
-	drag = false;
-	food = false;
-	bubble = true;
-	dump = false;
-	skate = false;
-	lantern = false;
-	paint = false;
 }
 function foodPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -329,14 +349,16 @@ function foodPic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("foodsPic").style.display = "block";
+    drag = false;
+    food = true;
+    bubble = false;
+    dump = false;
+    skate = false;
+    lantern = false;
+    paint = false;
+    setImage(foodArray, 'picFood');
+    setImageReference(foodArray, "foodPop");
     checkOrientation("picFood");
-	drag = false;
-	food = true;
-	bubble = false;
-	dump = false;
-	skate = false;
-	lantern = false;
-	paint = false;
 }
 function dumplingPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -346,14 +368,16 @@ function dumplingPic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("dumplingPic").style.display = "block";
+    drag = false;
+    food = false;
+    bubble = false;
+    dump = true;
+    skate = false;
+    lantern = false;
+    paint = false;
+    setImage(dumplingArray, 'picDumpling');
+    setImageReference(dumpingArray, "dumpPop");
     checkOrientation("picDumpling");
-	drag = false;
-	food = false;
-	bubble = false;
-	dump = true;
-	skate = false;
-	lantern = false;
-	paint = false;
 }
 function skatingPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -363,14 +387,16 @@ function skatingPic() {
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("skatingPic").style.display="block";
+    drag = false;
+    food = false;
+    bubble = false;
+    dump = false;
+    skate = true;
+    lantern = false;
+    paint = false;
+    setImage(skatingArray, 'picSkating');
+    setImageReference(skatingArray, "skatePop");
     checkOrientation("picSkating");
-	drag = false;
-	food = false;
-	bubble = false;
-	dump = false;
-	skate = true;
-	lantern = false;
-	paint = false;
 }
 function lanternPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -380,14 +406,16 @@ function lanternPic() {
     document.getElementById("skatingPic").style.display="none";
     document.getElementById("paintPic").style.display="none";
     document.getElementById("lanternPic").style.display="block";
+    drag = false;
+    food = false;
+    bubble = false;
+    dump = false;
+    skate = false;
+    lantern = true;
+    paint = false;
+    setImage(lanternArray, 'picLantern');
+    setImageReference(lanternArray, "lanternPop");
     checkOrientation("picLantern");
-	drag = false;
-	food = false;
-	bubble = false;
-	dump = false;
-	skate = false;
-	lantern = true;
-	paint = false;
 }
 function paintPic() {
     document.getElementById("bubbleTeaPic").style.display = "none";
@@ -397,33 +425,44 @@ function paintPic() {
     document.getElementById("skatingPic").style.display="none";
     document.getElementById("lanternPic").style.display="none";
     document.getElementById("paintPic").style.display="block";
+    drag = false;
+    food = false;
+    bubble = false;
+    dump = false;
+    skate = false;
+    lantern = false;
+    paint = true;
+    setImage(paintArray, 'picPaint');
+    setImageReference(paintArray, "PaintPop");
     checkOrientation("picPaint");
-	drag = false;
-	food = false;
-	bubble = false;
-	dump = false;
-	skate = false;
-	lantern = false;
-	paint = true;
 }
 
-function next(arr, id, topic) {
+function next(arr, id, topic, popID) {
     counter = ++counter % arr.length;
-	console.log(counter);
-	console.log(arr[counter].src);
-	document.getElementById(id).src = arr[counter].src;
-    //document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
+    setImageReference(arr, popID);
+    document.getElementById(id).src = arr[counter].src;
     checkOrientation(id);
 }
 
-function previous(arr, id, topic) {
+function previous(arr, id, topic, popID) {
+    globalID = id;
     if (counter == 0) {
         counter = arr.length;
     }
     counter = --counter;
-	document.getElementById(id).src = arr[counter].src;
-    //document.getElementById(id).src = "img/" + topic + "/pic" + counter + ".jpg";
+    setImageReference(arr, popID)
+    document.getElementById(id).src = arr[counter].src;
     checkOrientation(id);
+}
+
+function setImage(arr,id) {
+   	document.getElementById(id).src = arr[counter].src;
+}
+
+function setImageReference(arr, id) {
+  console.log(arr);
+  console.log(id);
+  document.getElementById(id).href = arr[counter].src;
 }
 
 document.addEventListener('keydown', function(event) {
@@ -431,11 +470,12 @@ document.addEventListener('keydown', function(event) {
 	var slot1 = info[0];
 	var slot2 = info[1];
 	var slot3 = info[2];
+  var slot4 = info[3];
 	var array = getArrayByName(slot1);
 	if (event.keyCode == 37) {
-		previous(array, slot2, slot3);
+		previous(array, slot2, slot3, slot4);
     } else if (event.keyCode == 39) {
-		next(array, slot2, slot3);
+		next(array, slot2, slot3, slot4);
     }
 })
 </script>
